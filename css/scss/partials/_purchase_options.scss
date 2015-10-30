@@ -1,0 +1,154 @@
+@import "bourbon/bourbon";
+@import "modules/all";
+
+.purchase-options {
+	@include transition(all .6s ease-out);
+	overflow: hidden;
+	max-height: 0;
+	background: #fff;
+	&.in-view {
+		max-height: 800px;
+		border-bottom: 1px solid #d1d1d1;
+	}
+}
+
+.option-set-header {
+	color: #909090;
+	font-weight: normal;
+	text-align: center;
+	text-transform: uppercase;
+	position: relative;
+	margin: 0 12px;
+	&:after {
+		content: "";
+		border-top: 1px solid #ddd;
+		position: absolute;
+		left: 0;
+		top: 1.5em;
+		margin-top: -1em;
+		width: 100%;
+		display: block;
+		z-index: 3;
+	}
+	.wrap {
+		background: #fff;
+		padding: 0 .5em;
+		position: relative;
+		z-index: 4;
+		display: inline-block;
+		overflow: hidden;
+	}
+	.selection {
+		@include transition(max-width .5s ease-in-out);
+		color: #624c9e;
+		font-weight: bold;
+		max-width:0;
+		overflow: hidden;
+		display: inline-block;
+		float: right;
+	}
+	&.init .selection {
+		max-width: 280px;
+		padding-left: .5em;
+	}
+}
+
+.option-set {
+	margin: 0 9px 12px;
+	padding-top: 10px;
+	@include clearfix;
+	position: relative;
+	.option-btn {
+		width: 64px;
+		height: 64px;
+		display: inline-block;
+		margin: 0 4.5px 9px;
+		position: relative;
+		text-align: center;
+		font-size: 3em;
+		line-height: 60px;
+		font-family: "Helvetica Neue", anti-aliased;
+		color: #d1d1d1;
+		-webkit-tap-highlight-color: rgba(0,0,0,0);
+		position: relative;
+		z-index:2;
+		&.active {
+			color: #624c9e;
+			&:after {
+				content: "";
+				width: 24px;
+				height: 24px;
+				display: block;
+				background: url(../../../images/check.png) no-repeat;
+				background-size: 24px 24px;
+				position:absolute;
+				bottom: 0;
+				right: 0;
+				@include animation(fadeIn .2s ease-in);
+			}
+		}
+		&.clicked {
+			@include animation(flash .2s ease-in);
+			.mask {
+				@include animation(flash .2s ease-in);
+			}
+		}
+		img {
+			display: block;
+			width: 100%;
+		}
+		.mask {
+			overflow: hidden;
+			border-radius: 50%;
+			display: block;
+			width: 100%;
+			height: 100%;
+			border: 2px solid #d1d1d1;
+		}
+		&.active .mask {
+			border-color: #624c9e;
+		}
+	}
+	.incremental-plus {
+		float: right;
+	}
+	.quantity {
+		text-align: center;
+		display: inline-block;
+		width: auto;
+		margin: 0;
+		color: #624c9e;
+		position: absolute;
+		width: 100%;
+		left: 0;
+		font-size: 42px;
+		font-family: "Helvetica Neue", anti-aliased;
+		top: 13px;
+		z-index:1;
+	}
+}
+
+
+@include keyframes(fadeIn) {
+  from {
+    @include transform(scale(0));
+  }
+  to {
+    @include transform(scale(1));
+  }
+}
+
+@include keyframes(flash) {
+  0% {
+    border-color: #d1d1d1;
+    color: #d1d1d1;
+  }
+  50% {
+    border-color: #624c9e;
+    color: #624c9e;
+  }
+  100% {
+  	border-color: #d1d1d1;
+  	color: #d1d1d1;
+  }
+}
